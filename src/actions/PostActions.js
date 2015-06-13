@@ -1,8 +1,16 @@
 import { Actions, Store, Flummox } from 'flummox';
 
+import Post from '../models/Post';
+
 class PostActions extends Actions {
 
-  fetchNext(length) {
-    return length;
+  fetchNext() {
+    return true;
+  }
+
+  createNewPost (item) {
+    return new Post(item);
   }
 }
+
+export default PostActions;

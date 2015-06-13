@@ -1,5 +1,6 @@
 import { Actions, Store, Flummox } from 'flummox';
-import asyncFetch from '../helpers/asyncFetch.js';
+
+import asyncFetch from '../helpers/asyncFetch';
 
 class PostStore extends Store {
 
@@ -12,6 +13,7 @@ class PostStore extends Store {
     this.getBy = 10;
 
     this.register(postActions.fetchNext, this.handleFetchNext);
+    this.register(postActions.createNewPost, this.handleCreateNewPost);
 
     this.state = {};
   }
@@ -27,10 +29,15 @@ class PostStore extends Store {
     this.offset = this.offset + data.items.length;
 
     data.items.forEach(item => {
-      let post = new Post(item);
-      this.setState({
-        [post.id]: post;
-      });
+      flux.getActions('posts').createNewPost(item);
+    });
+  }
+
+  handleCreateNewPost (post) {
+    this.setState({
+      [post.id]: post
     });
   }
 }
+
+export default PostStore;

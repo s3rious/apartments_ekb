@@ -1,6 +1,6 @@
 module.exports = {
   context: __dirname,
-  entry: './src/parser.js',
+  entry: './src/index.js',
   output: {
     path: './dist/',
     filename: 'parser.js'
@@ -8,7 +8,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
+        test: /\.js(x)?$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'babel',
         query: {

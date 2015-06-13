@@ -1,29 +1,18 @@
 import React from 'react';
+import FluxComponent from 'flummox/component';
+import flux from '../flux';
 
-class HelloWorld extends React.Component {
-
-  constructor(props) {
-    super(props);
-    //set the state as a property on the class
-    this.state = {};
-  }
-
-  componentWillMount() {
-    //executes when the component is about to mount onto DOM
-  }
-
-  componentWillUnmount() {
-    //executes when the component is about to unmount from DOM
-  }
-
-  customMethod() {
-    //force a re-render by changing the state
-    this.setState({})
-  }
+class Apartment extends React.Component {
 
   render() {
+    let apartment = this.props.data;
+
     return (
-      <h1>{this.state.message}</h1>
+      <div className="Apartment">
+        { apartment.name }
+      </div>
     );
   }
 }
+
+export default Apartment;
