@@ -135,8 +135,8 @@ let applyTests = function (string, context) {
       address = address.replace(/((Н|н)ов(ая)?|Н\.)? (С|с)ортировк(а)?/, '');
       context.address.district = 'Новая Сортировка';
     }
-    else if (/(А|а)кадемическ(ий)?/.test(address.toLowerCase())) {
-      address = address.replace(/(А|а)кадемическ(ий)?/, '');
+    else if (/(А|а)кадеми(чес|чсе)к(ий)?/.test(address.toLowerCase())) {
+      address = address.replace(/(А|а)кадеми(чес|чсе)к(ий)?/, '');
       context.address.district = 'Академический';
     }
     else if (/(Б|б)отани(ка|ческий)?/.test(address.toLowerCase())) {
@@ -203,9 +203,9 @@ let applyTests = function (string, context) {
     return false;
   }
 
-  let photosRx = /(Ф|ф)ото(графии)(\ )??(\ )?\:/;
+  let photosRx = /(Ф|ф)ото(графии)?\s?\:\s?/;
   if (photosRx.test(string.toLowerCase())) {
-    let vkAlbumRegex = /(http(s)?\:\/\/)vk\.com\/album\-\d+_\d+/;
+    let vkAlbumRegex = /(http(s)?\:\/\/)?(m\.)?vk\.com\/album\-\d+_\d+/;
 
     if (vkAlbumRegex.test(string)) {
       context.photos = {
@@ -236,9 +236,24 @@ let applyTests = function (string, context) {
     return false;
   }
 
-  let nameRx = /(С|с)обствен(н)?ик|(Б|б)ез\ (К|к)ом/;
+  let nameRx = /\([а-яА-Яеё\s]+(С|с)обствен(н)?ик(а)?|(Б|б)ез\s(К|к)ом[а-яА-Яеё\s]+\)/;
   if (nameRx.test(string.toLowerCase())) {
-    context.name = s(string).trim().humanize().value();
+
+    context.name = s(string)
+      .toLowerCase()
+      .replace(nameRx, '')
+      .replace(/объявлени(е)/, '')
+      .replace(/(сда(ё|е)т(ь)?ся|сдам)\s?\:?/, '')
+      .replace(/(\d)(\-)?([а-яеё])/, '$1 $3')
+      .replace(/(\d)(\s|\-)?(х|я|ая)(\s|\.|\-)?/, '$1 ')
+      .replace(/(\d)(\s|\-|\_)ком(н)?(\ |\.)/, '$1 комнатная ')
+      .replace(/ком(н)?\.?\sкв/, 'комнатная кв')
+      .replace(/кв(\s|\-|\_)р(а|у|е)/, 'квартир$2')
+      .replace(/(\s|\.)кв(\s|$)/, ' квартира ')
+      .replace(/(^(\)|\()\s*)|(\s|\.|\!|\,|\s*(\)|\()?)*$/, '')
+      .replace(/\(.+$/, '')
+      .humanize()
+      .value();
 
     if (/собственник/.test(string.toLowerCase())) {
       context.hostType = 'owner';
@@ -248,6 +263,38 @@ let applyTests = function (string, context) {
     }
     else {
       context.hostType = 'unknown';
+    }
+
+    if (/подселение|комнат(а|ы)/.test(context.name.toLowerCase())) {
+      context.type = 'private-room';
+    }
+    else if (/студи|малосе|однок|1\sкомнатн/.test(context.name.toLowerCase())) {
+      context.type = 'apartment';
+      context.rooms = 1;
+    }
+    else if (/двухк|2\sкомнатн/.test(context.name.toLowerCase())) {
+      context.type = 'apartment';
+      context.rooms = 2;
+    }
+    else if (/тр(ё|е)хк|3\sкомнатн/.test(context.name.toLowerCase())) {
+      context.type = 'apartment';
+      context.rooms = 3;
+    }
+    else if (/четыр(ё|е)хк|4\sкомнатн/.test(context.name.toLowerCase())) {
+      context.type = 'apartment';
+      context.rooms = 4;
+    }
+    else if (/пятик|5\sкомнатн/.test(context.name.toLowerCase())) {
+      context.type = 'apartment';
+      context.rooms = 5;
+    }
+    else if ((/\d/).test(context.name.toLowerCase())) {
+      context.type = 'apartment';
+      context.rooms = parseInt(context.name.toLowerCase().match(/\d/)[0]);
+    }
+    else {
+      context.rejectReasons.push('unknown type');
+      console.warn('... got a possible mismatch or unknown type, apartment will be excluded', context);
     }
 
     console.log(`... got a name: ${context.name}...`);
