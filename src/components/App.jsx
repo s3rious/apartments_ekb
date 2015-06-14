@@ -1,22 +1,74 @@
-import React from 'react';
+import React from 'react/addons';
 import FluxComponent from 'flummox/component';
 import flux from '../flux';
 
+import mui from 'material-ui';
+let ThemeManager = new mui.Styles.ThemeManager();
+
 import ApartmentList from './ApartmentList.jsx';
+import ApartmentFilter from './ApartmentFilter.jsx';
+import ApartmentMap from './ApartmentMap.jsx';
+
+import './App.css';
 
 class App extends React.Component {
 
+  static childContextTypes = {
+    muiTheme: React.PropTypes.object
+  }
+
+  getChildContext() {
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    };
+  }
+
   render () {
     return (
-      <FluxComponent flux={flux}>
-        <FluxComponent
-          connectToStores={{
-            apartments: store => ({ apartments: store.state })
-          }}
-        >
-          <ApartmentList />
-        </FluxComponent>
-      </FluxComponent>
+      <main className="App-main">
+        <div className="App-container">
+
+          <div className="row">
+            <div className="App-filter App-col col s8">
+              <FluxComponent
+                flux={flux}
+                connectToStores={{
+                  apartments: store => ({ filter: store.state.filter })
+                }}
+              >
+                <ApartmentFilter />
+              </FluxComponent>
+            </div>
+          </div>
+
+          <div className="row">
+
+            <div className="App-apartments App-col col s8">
+              <FluxComponent
+                flux={flux}
+                connectToStores={{
+                  apartments: store => ({ apartments: store.getFiltered() })
+                }}
+              >
+                <ApartmentList />
+              </FluxComponent>
+            </div>
+
+            <div className="App-map App-col grey lighten-2 col s4 z-depth-1">
+              <FluxComponent
+                flux={flux}
+                connectToStores={{
+                  apartments: store => ({ apartments: store.getFiltered() })
+                }}
+              >
+                <ApartmentMap />
+              </FluxComponent>
+            </div>
+
+          </div>
+
+        </div>
+      </main>
     );
   }
 }

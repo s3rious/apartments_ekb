@@ -22,6 +22,21 @@ class Apartment {
       })
       .value();
 
+    if (!this.price || !this.price.number || _(this.price.number).isNaN() || this.price.number < 1) {
+      this.rejectReasons.push('unknown price');
+      console.warn('... got a possible mismatch or unknown price, apartment will be excluded', this);
+    }
+
+    if (!this.address || (!this.address.district && this.address.city === 'Екатеринбург')) {
+      this.rejectReasons.push('unknown location');
+      console.warn('... got a possible mismatch or unknown city, apartment will be excluded', this);
+    }
+
+    if (!this.type) {
+      this.rejectReasons.push('unknown type');
+      console.warn('... got a possible mismatch or unknown type, apartment will be excluded', this);
+    }
+
     console.groupEnd('Apartment');
   }
 }

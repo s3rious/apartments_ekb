@@ -27,11 +27,6 @@ let applyTests = function (string, context) {
       context.price.needDeposit = true;
     }
 
-    if (!gotNum || _(context.price.number).isNaN() || context.price.number < 1) {
-      context.rejectReasons.push('unknown price');
-      console.warn('... got a possible mismatch or unknown price, apartment will be excluded', context);
-    }
-
     console.log(`... got a price...`, context.price);
     return false;
   }
@@ -192,13 +187,7 @@ let applyTests = function (string, context) {
       context.address.district = 'Юго-Западный';
     }
 
-    if (!context.address.district && context.address.city === 'Екатеринбург') {
-      context.rejectReasons.push('unknown location');
-      console.warn('... got a possible mismatch or unknown city, apartment will be excluded', context);
-    }
-
-
-    context.address.street = s(address).replace(/\(\s\)/, '').trim(/(\ |\,|\.)/).value();
+    context.address.street = s(address).replace(/\(\s?\)/, '').trim(/(\ |\,|\.)/).value();
     console.log(`... got an address...`, context.address);
     return false;
   }
@@ -291,10 +280,6 @@ let applyTests = function (string, context) {
     else if ((/\d/).test(context.name.toLowerCase())) {
       context.type = 'apartment';
       context.rooms = parseInt(context.name.toLowerCase().match(/\d/)[0]);
-    }
-    else {
-      context.rejectReasons.push('unknown type');
-      console.warn('... got a possible mismatch or unknown type, apartment will be excluded', context);
     }
 
     console.log(`... got a name: ${context.name}...`);

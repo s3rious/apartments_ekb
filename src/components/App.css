@@ -1,0 +1,29 @@
+@import "../../node_modules/materialize-css/bin/materialize.css";
+
+.App {
+  display: block;
+}
+
+.App-main {
+}
+
+.App-container {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+}
+
+.App-apartments {
+}
+
+.App-map {
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@import "./Apartment.css";

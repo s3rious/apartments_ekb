@@ -9,21 +9,32 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "autoprefixer-core": "^5.2.0",
     "babel": "^5.5.6",
     "babel-core": "^5.5.6",
     "babel-eslint": "^3.1.15",
     "babel-loader": "^5.1.4",
+    "css-loader": "^0.14.5",
     "eslint": "^0.22.1",
+    "file-loader": "^0.8.4",
+    "materialize-css": "^0.96.1",
     "node-libs-browser": "^0.5.2",
+    "normalize.css": "^3.0.3",
+    "postcss-import": "^5.2.2",
+    "postcss-loader": "^0.4.4",
+    "postcss-nested": "^0.3.2",
+    "react-hot-loader": "^1.2.7",
+    "style-loader": "^0.12.3",
     "webpack": "^1.9.10",
     "webpack-dev-server": "^1.9.0"
   },
   "dependencies": {
     "flummox": "^3.5.2",
     "lodash": "^3.9.3",
-    "underscore.string": "^3.1.1",
+    "material-ui": "^0.9.0",
     "react": "^0.13.3",
+    "react-tap-event-plugin": "^0.1.7",
     "then-jsonp": "^1.0.3",
-    "react-tap-event-plugin": "^0.1.7"
+    "underscore.string": "^3.1.1"
   }
 }

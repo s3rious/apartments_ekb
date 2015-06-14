@@ -10,7 +10,7 @@ class PostStore extends Store {
     const postActions = flux.getActions('posts');
 
     this.offset = 1;
-    this.getBy = 20;
+    this.getBy = 10;
 
     this.register(postActions.fetchNext, this.handleFetchNext);
     this.register(postActions.createNewPost, this.handleCreateNewPost);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react/addons';
 import FluxComponent from 'flummox/component';
 import flux from '../flux';
 import _ from 'lodash';
@@ -7,17 +7,36 @@ import Apartment from './Apartment.jsx';
 
 class ApartmentList extends React.Component {
 
-  render() {
+  render () {
     let apartments = this.props.apartments;
 
+    let oddEvenAparments = {
+      odd: _.filter(apartments, (value, index) => {
+        return index % 2 !== 0;
+      }),
+      even: _.filter(apartments, (value, index) => {
+        return index % 2 === 0;
+      })
+    };
+
     return (
-      <div className="Apartments">
-        {_.map(apartments, function (apartment) {
-          return (
-            <div className="Apartments-apartment">
-              <Apartment data={ apartment } />
-            </div>);
-        })}
+      <div className="ApartmentsList row">
+        <div className="col s6">
+          {_.map(oddEvenAparments.odd, function (apartment) {
+            return (
+              <div className="Apartments-apartment">
+                <Apartment data={ apartment } />
+              </div>);
+          })}
+        </div>
+        <div className="col s6">
+          {_.map(oddEvenAparments.even, function (apartment) {
+            return (
+              <div className="Apartments-apartment">
+                <Apartment data={ apartment } />
+              </div>);
+          })}
+        </div>
       </div>
     );
   }
