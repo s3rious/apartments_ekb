@@ -273,7 +273,7 @@ class Filter {
     else if (apartment.address.city !== getActive('city').name) {
       return false;
     }
-    else if (apartment.address.district !== getActive('district').name && !getActive('district').dontFilter) {
+    else if (getActive('city').hasDistricts && apartment.address.district !== getActive('district').name && !getActive('district').dontFilter) {
       return false;
     }
     else {
