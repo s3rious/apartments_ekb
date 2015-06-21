@@ -20,13 +20,13 @@ class Filter {
         dontFilter: true
       },
       {
+        name: 'Комната',
+        matcher: /подселение|комнат(а|ы)/
+      },
+      {
         name: 'Квартира',
         hasRooms: true,
         matcher: /^(?! подселение|комнат(а|ы)).*/
-      },
-      {
-        name: 'Комната',
-        matcher: /подселение|комнат(а|ы)/
       }
     ];
 
@@ -37,24 +37,20 @@ class Filter {
         dontFilter: true
       },
       {
-        name: 1,
+        name: '1',
         matcher: /студи|малосе|однок|1\sкомнатн/
       },
       {
-        name: 2,
+        name: '2',
         matcher: /двухк|2\sкомнатн/
       },
       {
-        name: 3,
+        name: '3',
         matcher: /тр(ё|е)хк|3\sкомнатн/
       },
       {
-        name: 4,
-        matcher: /четыр(ё|е)хк|4\sкомнатн/
-      },
-      {
-        name: 5,
-        matcher: /пятик|5\sкомнатн/
+        name: '4+',
+        matcher: /(четыр(ё|е)хк|4\sкомнатн)|(пятик|5\sкомнатн)|(шести|6\sкомнатн)/
       }
     ];
 

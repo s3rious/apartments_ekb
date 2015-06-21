@@ -1,0 +1,54 @@
+@import "../../../node_modules/normalize.css/normalize.css";
+
+@import "../Checkbox/Checkbox.css";
+@import "../Select/Select.css";
+
+:root {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+body {
+  background-color: #ECEFF1;
+}
+
+fieldset {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.App {
+  padding-right: 40%;
+  background-color: #FFFFFF;
+
+  &-container {
+    box-sizing: border-box;
+    padding: 1.5rem 1rem;
+  }
+
+  &-filter {
+    padding: 0.5rem 1rem 0.5rem;
+    margin: -1.5rem -1rem 0;
+    border-bottom: 1px solid #CFD8DC;
+  }
+
+  &-apartments {
+    background-color: #ECEFF1;
+    padding: 1.5rem 1rem;
+    margin: 0 -1rem -1.5rem;
+  }
+
+  &-map {
+    box-sizing: border-box;
+    width: 40%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    display: none;
+  }
+}
+
+@import "../Apartment/Apartment.css";

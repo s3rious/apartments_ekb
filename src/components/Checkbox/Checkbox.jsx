@@ -2,6 +2,8 @@ import React from 'react/addons';
 
 import classnames from 'classnames/dedupe';
 
+import './Checkbox.css';
+
 class Checkbox extends React.Component {
 
   static propTypes = {
@@ -38,7 +40,9 @@ class Checkbox extends React.Component {
             checked={ this.props.payload }
             onChange={ this.handleChange.bind(this) }
           />
-          <span className="Checkbox-label">{ this.props.label }</span>
+          <span className="Checkbox-label">
+            { this.props.children }
+          </span>
         </label>
       </fieldset>
     );

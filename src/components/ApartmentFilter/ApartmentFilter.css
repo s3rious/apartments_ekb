@@ -1,0 +1,74 @@
+.Filter {
+
+  &-line {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &-section {
+    padding: 0.5rem 0;
+  }
+
+  &-cell {
+    flex-grow: 1;
+    margin-right: 2em;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &-label {
+    display: inline-block;
+    white-space: nowrap;
+    width: 4rem;
+    font-size: 0.875rem;
+
+    &--wo-limit {
+      width: auto;
+    }
+  }
+
+  .ButtonGroup-buttons,
+  .Select-select {
+    width: 16rem;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 1280px) {
+
+  .Filter {
+    margin-right: 0rem;
+
+    &-cell:nth-child(2) {
+      margin-right: 0;
+    }
+
+    &-label {
+      width: 3rem;
+
+      &--wo-limit {
+        width: auto;
+      }
+    }
+
+    .ButtonGroup-buttons,
+    .Select-select {
+      width: 13rem;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+
+  .Filter {
+
+    &-line {
+      display: block;
+    }
+  }
+}

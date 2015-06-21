@@ -1,9 +1,9 @@
 import React from 'react/addons';
 import FluxComponent from 'flummox/component';
-import flux from '../flux';
+import flux from '../../flux';
 import _ from 'lodash';
 
-import Apartment from './Apartment.jsx';
+import Apartment from '../Apartment/Apartment.jsx';
 
 class ApartmentList extends React.Component {
 

@@ -3,6 +3,8 @@ import React from 'react/addons';
 import _ from 'lodash';
 import classnames from 'classnames/dedupe';
 
+import './Select.css';
+
 class Select extends React.Component {
 
   static propTypes = {
@@ -54,18 +56,16 @@ class Select extends React.Component {
         className={ classes }
         disabled={this.props.disabled || false}
       >
-        <label>
-          <span className="Select-label">
-            { this.props.label }
-          </span>
-          <select
-            className="Select-select"
-            onChange={ this.handleChange.bind(this) }
-            defaultValue={ _.findWhere(this.props.payload, { active: true }) }
-          >
-            { options }
-          </select>
-        </label>
+        <span className="Select-label">
+          { this.props.children }
+        </span>
+        <select
+          className="Select-select"
+          onChange={ this.handleChange.bind(this) }
+          defaultValue={ _.findWhere(this.props.payload, { active: true }) }
+        >
+          { options }
+        </select>
       </fieldset>
     )
   }

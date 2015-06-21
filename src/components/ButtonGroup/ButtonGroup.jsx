@@ -3,6 +3,10 @@ import React from 'react/addons';
 import _ from 'lodash';
 import classnames from 'classnames/dedupe';
 
+import Ink from 'react-ink';
+
+import './ButtonGroup.css';
+
 class ButtonGroup extends React.Component {
 
   static propTypes = {
@@ -10,7 +14,8 @@ class ButtonGroup extends React.Component {
     label: React.PropTypes.string.isRequired,
     payload: React.PropTypes.array.isRequired,
     showDefault: React.PropTypes.bool,
-    disabled: React.PropTypes.bool
+    disabled: React.PropTypes.bool,
+    mods: React.PropTypes.objectOf(React.PropTypes.string)
   }
 
   handleChange (clickedButton) {
@@ -51,27 +56,36 @@ class ButtonGroup extends React.Component {
             onClick={ this.handleChange.bind(this, button) }
           >
             { button.name }
+            <Ink />
           </button>
         );
       })
       .value();
 
-    let classes = classnames({
-      'ButtonGroup': true,
-      'ButtonGroup--disabled': this.props.disabled
-    });
+    let classes = classnames(
+      _.extend(
+        {
+          'ButtonGroup': true,
+          'ButtonGroup--disabled': this.props.disabled
+        },
+        _(this.props.mods)
+          .chain()
+          .map((a, b) => { return `ButtonGroup--${b}--${a}`; })
+          .thru((classname) => { return { [classname]: true } })
+          .value()
+      )
+    );
 
     return (
 
-      <fieldset
-        className={ classes }
-        disabled={this.props.disabled || false}
-      >
-        <label className="ButtonGroup-label">
-          { this.props.label }
-        </label>
-        <div className="ButtonGroup-buttons">
-          { buttons }
+      <fieldset disabled={this.props.disabled || false}>
+        <div className={ classes }>
+          <label className="ButtonGroup-label">
+            { this.props.children }
+          </label>
+          <div className="ButtonGroup-buttons">
+            { buttons }
+          </div>
         </div>
       </fieldset>
     )

@@ -1,6 +1,6 @@
 import React from 'react/addons';
 import FluxComponent from 'flummox/component';
-import flux from '../flux';
+import flux from '../../flux';
 
 class ApartmentMap extends React.Component {
 

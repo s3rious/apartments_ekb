@@ -1,0 +1,35 @@
+.Select {
+  cursor: default;
+  white-space: nowrap;
+
+  &-label {
+    margin-right: 1rem;
+  }
+
+  &-select {
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+
+    background: transparent;
+    margin: 0;
+    padding: 0.375rem 1rem;
+    /* padding: 0.5rem 1rem; */
+    border: 1px solid #B3E5FC;
+
+    appearance: none;
+    border-radius: 0.25rem;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.32s cubic-bezier(0.55, 0, 0.1, 1),
+                border-color     0.32s cubic-bezier(0.55, 0, 0.1, 1);
+
+    &--hover,
+    &:hover {
+      background: #E1F5FE;
+      border-color: #B3E5FC;
+      transition: background-color 0s linear,
+                  border-color     0s linear;
+    }
+  }
+}
