@@ -4,6 +4,8 @@ import React from 'react/addons';
 import { Store } from 'flummox';
 import _ from 'lodash';
 
+import Filter from '../models/Filter';
+
 class ApartmentStore extends Store {
 
   constructor (flux) {
@@ -16,17 +18,15 @@ class ApartmentStore extends Store {
     this.register(apartmentActions.changeFilter, this.handleChangeFilter);
 
     this.state = {
-      filter: {
-        withoutRejected: true,
-        type: null,
-        rooms: null
-      },
+      filter: Filter.getInitialState(),
       apartments: {}
     };
   }
 
   handleCreateNewApartment (apartment) {
     const id = this.apartmentCounter++;
+
+    apartment.id = id;
 
     this.setState({
       apartments: React.addons.update(
@@ -36,8 +36,13 @@ class ApartmentStore extends Store {
     });
   }
 
-  handleChangeFilter (filter) {
-
+  handleChangeFilter (changedSegment) {
+    this.setState({
+      filter: React.addons.update(
+        this.state.filter,
+        { $merge: changedSegment }
+      )
+    });
   }
 
   get (id) {
@@ -52,18 +57,7 @@ class ApartmentStore extends Store {
     let filter = this.state.filter;
 
     return _.filter(this.state.apartments, (apartment) => {
-      if (filter.withoutRejected && apartment.rejectReasons.length > 0) {
-        return false;
-      }
-      else if (filter.type !== null && (filter.type !== apartment.type)) {
-        return false;
-      }
-      else if (filter.type === 'apartment' && filter.rooms !== null && (filter.rooms !== apartment.rooms)) {
-        return false;
-      }
-      else {
-        return true;
-      }
+      return Filter.processApartment(apartment, filter);
     });
   }
 }

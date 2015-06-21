@@ -6,8 +6,6 @@ import s from 'underscore.string';
 import Filter from '../models/Filter';
 let tests = Filter.getTests();
 
-window.tests = tests;
-
 let applyTests = function (string, context) {
 
   let priceRx = /(С|с)тоимость(\ )?\:(\ )?/;
@@ -135,33 +133,17 @@ let applyTests = function (string, context) {
       context.hostType = 'unknown';
     }
 
-    if (/подселение|комнат(а|ы)/.test(context.name.toLowerCase())) {
-      context.type = 'private-room';
-    }
-    else if (/студи|малосе|однок|1\sкомнатн/.test(context.name.toLowerCase())) {
-      context.type = 'apartment';
-      context.rooms = 1;
-    }
-    else if (/двухк|2\sкомнатн/.test(context.name.toLowerCase())) {
-      context.type = 'apartment';
-      context.rooms = 2;
-    }
-    else if (/тр(ё|е)хк|3\sкомнатн/.test(context.name.toLowerCase())) {
-      context.type = 'apartment';
-      context.rooms = 3;
-    }
-    else if (/четыр(ё|е)хк|4\sкомнатн/.test(context.name.toLowerCase())) {
-      context.type = 'apartment';
-      context.rooms = 4;
-    }
-    else if (/пятик|5\sкомнатн/.test(context.name.toLowerCase())) {
-      context.type = 'apartment';
-      context.rooms = 5;
-    }
-    else if ((/\d/).test(context.name.toLowerCase())) {
-      context.type = 'apartment';
-      context.rooms = parseInt(context.name.toLowerCase().match(/\d/)[0]);
-    }
+    tests.type.forEach((type) => {
+      if (type.matcher.test(context.name.toLowerCase())) {
+        context.type = type.name;
+      }
+    });
+
+    tests.rooms.forEach((rooms) => {
+      if (rooms.matcher.test(context.name.toLowerCase())) {
+        context.rooms = rooms.name;
+      }
+    });
 
     console.log(`... got a name: ${context.name}...`);
     return false;
@@ -178,4 +160,27 @@ let applyTests = function (string, context) {
   }
 };
 
-export default applyTests;
+let processExcluded = (context) => {
+
+  if (!context.price || !context.price.number || _(context.price.number).isNaN() || context.price.number < 1) {
+    context.rejectReasons.push('unknown price');
+    console.warn('... got a possible mismatch or unknown price, apartment will be excluded', context);
+  }
+
+  if (!context.address || (!context.address.district && context.address.city === 'Екатеринбург')) {
+    context.rejectReasons.push('unknown location');
+    console.warn('... got a possible mismatch or unknown city, apartment will be excluded', context);
+  }
+
+  if (!context.type) {
+    context.rejectReasons.push('unknown type');
+    console.warn('... got a possible mismatch or unknown type, apartment will be excluded', context);
+  }
+
+  if (context.type && context.type.hasRooms && !context.rooms) {
+    context.rejectReasons.push('unknown number of rooms');
+    console.warn('... got a possible mismatch or unknown number of rooms, apartment will be excluded', context);
+  }
+}
+
+export default { applyTests, processExcluded} ;

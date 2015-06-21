@@ -6,9 +6,6 @@ class Filter {
 
     this.withoutRejected = true;
 
-    this.type = null;
-    this.rooms = null;
-
     this.price = {
       from: 0,
       to: Infinity
@@ -18,22 +15,26 @@ class Filter {
 
     this.type = [
       {
-        name: 'whatever',
-        isDefault: true
+        name: 'Любой',
+        isDefault: true,
+        dontFilter: true
       },
       {
-        name: 'apartment'
+        name: 'Квартира',
+        hasRooms: true,
+        matcher: /^(?! подселение|комнат(а|ы)).*/
       },
       {
-        name: 'private-room',
+        name: 'Комната',
         matcher: /подселение|комнат(а|ы)/
       }
     ];
 
     this.rooms = [
       {
-        name: 'whatever',
-        isDefault: true
+        name: 'Неважно',
+        isDefault: true,
+        dontFilter: true
       },
       {
         name: 1,
@@ -61,7 +62,12 @@ class Filter {
       {
         name: 'Екатеринбург',
         matcher: /((Е|е)катеринбург)/,
+        hasDistricts: true,
         isDefault: true
+      },
+      {
+        name: 'Берёзовский',
+        matcher: /(Б|б)ер(е|ё)зовский/
       },
       {
         name: 'Верхняя Пышма',
@@ -76,23 +82,20 @@ class Filter {
         matcher: /(П|п)реднеуральск/
       },
       {
-        name: 'Берёзовский',
-        matcher: /(Б|б)ер(е|ё)зовский/
+        name: 'Заречный',
+        matcher: /(З|з)аречный/
       },
       {
         name: 'пос. Шувакиш',
         matcher: /(Ш|ш)увакиш/
-      },
-      {
-        name: 'Заречный',
-        matcher: /(З|з)аречный/
       }
     ];
 
     this.district = [
       {
         name: 'Любой',
-        isDefault: true
+        isDefault: true,
+        dontFilter: true
       },
       {
         name: 'Центр',
@@ -210,11 +213,12 @@ class Filter {
   }
 
   getTests () {
+
     return _(this)
       .chain()
-      .mapValues((array) => {
-        if (_.isArray(array)) {
-          return _(array)
+      .mapValues((entity) => {
+        if (_.isArray(entity)) {
+          return _(entity)
             .chain()
             .filter((object) => {
               return !_.isUndefined(object.matcher);
@@ -229,8 +233,52 @@ class Filter {
       .value();
   }
 
-  getState () {
+  getInitialState () {
 
+    return _.mapValues(this, (entity) => {
+      if (_.isArray(entity)) {
+        return _.map(entity, (item) => {
+          var clone = _.clone(item);
+          clone.active = item.isDefault ? true : false;
+          return clone;
+        });
+      }
+      else {
+        return entity;
+      }
+    });
+  }
+
+  processApartment (apartment, state) {
+
+    let getActive = (key) => {
+      return _(state[key]).isArray() ? _.findWhere(state[key], { active: true }) : null;
+    };
+
+    if (state.withoutRejected && apartment.rejectReasons.length > 0) {
+      return false;
+    }
+    else if (apartment.price.number < state.from || apartment.price.number > state.to) {
+      return false;
+    }
+    else if (!apartment.photos && state.shouldHavePhotos) {
+      return false;
+    }
+    else if (apartment.type !== getActive('type').name && !getActive('type').dontFilter) {
+      return false;
+    }
+    else if (getActive('type').hasRooms && apartment.rooms !== getActive('rooms').name && !getActive('rooms').dontFilter) {
+      return false;
+    }
+    else if (apartment.address.city !== getActive('city').name) {
+      return false;
+    }
+    else if (apartment.address.district !== getActive('district').name && !getActive('district').dontFilter) {
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 }
 

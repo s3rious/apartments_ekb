@@ -2,9 +2,6 @@ import React from 'react/addons';
 import FluxComponent from 'flummox/component';
 import flux from '../flux';
 
-import mui from 'material-ui';
-let ThemeManager = new mui.Styles.ThemeManager();
-
 import ApartmentList from './ApartmentList.jsx';
 import ApartmentFilter from './ApartmentFilter.jsx';
 import ApartmentMap from './ApartmentMap.jsx';
@@ -12,16 +9,6 @@ import ApartmentMap from './ApartmentMap.jsx';
 import './App.css';
 
 class App extends React.Component {
-
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object
-  }
-
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
-  }
 
   render () {
     return (

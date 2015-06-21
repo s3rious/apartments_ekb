@@ -24,7 +24,10 @@ class ApartmentList extends React.Component {
         <div className="col s6">
           {_.map(oddEvenAparments.odd, function (apartment) {
             return (
-              <div className="Apartments-apartment">
+              <div
+                key={ apartment.id }
+                className="Apartments-apartment"
+              >
                 <Apartment data={ apartment } />
               </div>);
           })}
@@ -32,7 +35,10 @@ class ApartmentList extends React.Component {
         <div className="col s6">
           {_.map(oddEvenAparments.even, function (apartment) {
             return (
-              <div className="Apartments-apartment">
+              <div
+                key={ apartment.id }
+                className="Apartments-apartment"
+              >
                 <Apartment data={ apartment } />
               </div>);
           })}
