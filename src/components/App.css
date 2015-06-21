@@ -1,7 +1,8 @@
 /* @import "../../node_modules/materialize-css/bin/materialize.css"; */
 
-@import "./Checkbox.css";
 @import "./ButtonGroup.css";
+@import "./Checkbox.css";
+@import "./Select.css";
 
 .App {
   display: block;
