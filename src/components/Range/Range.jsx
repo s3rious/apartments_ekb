@@ -3,6 +3,7 @@ import React from 'react/addons';
 import _ from 'lodash';
 import ReactSlider from 'react-slider';
 import classnames from 'classnames/dedupe';
+import prettifyPrice from '../../helpers/prettifyPrice';
 
 import './Range.css';
 
@@ -30,8 +31,6 @@ class Range extends React.Component {
   }
 
   handleAfterChange () {
-
-    console.log(this.state.from, this.state.to)
 
     this.props.onChange({
       [this.props.name]: {
@@ -69,22 +68,30 @@ class Range extends React.Component {
               :
                 null
           }
-          <ReactSlider
-            min={ this.props.min }
-            max={ this.props.max }
-            defaultValue={ [this.props.min, this.props.max] }
-            step={ this.props.step }
-            minDistance={ this.props.step }
-            withBars={ true }
-            pearling={ true }
-            className="Range-range"
-            barClassName="Range-bar"
-            handleClassName="Range-handle"
-            handleActiveClassName="Range-handle--active"
-            disabled={ this.props.disabled }
-            onChange={ this.handleChange.bind(this) }
-            onAfterChange={ this.handleAfterChange.bind(this) }
-          />
+          <div className="Range-holder">
+            <span className="Range-from">
+              { prettifyPrice(this.state.from) }
+            </span>
+            <ReactSlider
+              min={ this.props.min }
+              max={ this.props.max }
+              defaultValue={ [this.props.min, this.props.max] }
+              step={ this.props.step }
+              minDistance={ this.props.step }
+              withBars={ true }
+              pearling={ true }
+              className="Range-range"
+              barClassName="Range-bar"
+              handleClassName="Range-handle"
+              handleActiveClassName="Range-handle--active"
+              disabled={ this.props.disabled }
+              onChange={ this.handleChange.bind(this) }
+              onAfterChange={ this.handleAfterChange.bind(this) }
+            />
+            <span className="Range-to">
+              { prettifyPrice(this.state.to) }
+            </span>
+          </div>
         </label>
       </fieldset>
     );

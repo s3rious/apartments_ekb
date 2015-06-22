@@ -1,8 +1,30 @@
 .Range {
+  padding-bottom: 1rem;
 
+  &-holder,
   &-range {
     width: 100%;
     height: 2rem;
+  }
+
+  &-holder {
+    position: relative;
+  }
+
+  &-from,
+  &-to {
+    font-size: 0.875rem;
+    position: absolute;
+    bottom: -1rem;
+  }
+
+  &-from {
+    left: 0;
+  }
+
+  &-to {
+    right: 0;
+    text-align: right;
   }
 
   &-bar {
