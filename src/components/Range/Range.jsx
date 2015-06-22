@@ -4,9 +4,9 @@ import _ from 'lodash';
 import ReactSlider from 'react-slider';
 import classnames from 'classnames/dedupe';
 
-import './Slider.css';
+import './Range.css';
 
-class Slider extends React.Component {
+class Range extends React.Component {
 
   static propTypes = {
     min: React.PropTypes.number,
@@ -46,12 +46,12 @@ class Slider extends React.Component {
     let classes = classnames(
       _.extend(
         {
-          'Slider': true,
-          'Slider--disabled': this.props.disabled
+          'Range': true,
+          'Range--disabled': this.props.disabled
         },
         _(this.props.mods)
           .chain()
-          .map((a, b) => { return `Slider--${b}--${a}`; })
+          .map((a, b) => { return `Range--${b}--${a}`; })
           .thru((classname) => { return { [classname]: true }; })
           .value()
       )
@@ -63,7 +63,7 @@ class Slider extends React.Component {
           {
             this.props.children
               ?
-                <span className="Slider-label">
+                <span className="Range-label">
                   { this.props.children }
                 </span>
               :
@@ -77,10 +77,10 @@ class Slider extends React.Component {
             minDistance={ this.props.step }
             withBars={ true }
             pearling={ true }
-            className="Slider-slider"
-            barClassName="Slider-bar"
-            handleClassName="Slider-handle"
-            handleActiveClassName="Slider-handle--active"
+            className="Range-range"
+            barClassName="Range-bar"
+            handleClassName="Range-handle"
+            handleActiveClassName="Range-handle--active"
             disabled={ this.props.disabled }
             onChange={ this.handleChange.bind(this) }
             onAfterChange={ this.handleAfterChange.bind(this) }
@@ -91,4 +91,4 @@ class Slider extends React.Component {
   }
 };
 
-export default Slider;
+export default Range;
