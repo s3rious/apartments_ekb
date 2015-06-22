@@ -36,12 +36,14 @@ class ApartmentStore extends Store {
     });
   }
 
-  handleChangeFilter (obj) {
+  handleChangeFilter (newFilter) {
+
+    let op = _.isObject(this.state.filter[newFilter.key]) ? '$merge' : '$set'; // Array is fine too
 
     this.setState({
       filter: React.addons.update(
         this.state.filter,
-        { [obj.key]: { $merge: obj.value } }
+        { [newFilter.key]: { [op]: newFilter.value } }
       )
     });
   }
