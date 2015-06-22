@@ -1,0 +1,56 @@
+.Slider {
+
+  &-slider {
+    width: 100%;
+    height: 2rem;
+  }
+
+  &-bar {
+    position: absolute;
+    top: 0.9375rem;
+    left: 0;
+    height: 0.125rem;
+    background: #ECEFF1;
+
+    &-1 {
+      background-color: #00A6F0;
+    }
+  }
+
+  &-handle {
+    width: 0.75rem;
+    height: 0.75rem;
+    margin: 0.625rem 0;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background-color: #00A6F0;
+    transform: scale(1, 1, 1);
+    transition: width  0.48s cubic-bezier(0.55, 0, 0.1, 1),
+                height 0.48s cubic-bezier(0.55, 0, 0.1, 1),
+                margin 0.48s cubic-bezier(0.55, 0, 0.1, 1);
+    will-change: width, height, margin;
+
+    &--active {
+      width: 2rem;
+      height: 2rem;
+      margin: 0 -0.625rem;
+      transition: width  0.16s cubic-bezier(0.55, 0, 0.1, 1),
+                  height 0.16s cubic-bezier(0.55, 0, 0.1, 1),
+                  margin 0.16s cubic-bezier(0.55, 0, 0.1, 1);
+    }
+  }
+
+  &--layout {
+
+    &--horisontal {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+
+      .Slider-label {
+        margin-right: 1rem;
+      }
+    }
+  }
+}

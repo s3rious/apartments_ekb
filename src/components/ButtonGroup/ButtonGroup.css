@@ -15,8 +15,8 @@
   outline: none;
   user-select: none;
   cursor: pointer;
-  transition: background-color 0.32s cubic-bezier(0.55, 0, 0.1, 1),
-              border-color     0.32s cubic-bezier(0.55, 0, 0.1, 1);
+  transition: background-color 0.48s cubic-bezier(0.55, 0, 0.1, 1),
+              border-color     0.48s cubic-bezier(0.55, 0, 0.1, 1);
 
   &--hover,
   &:hover {
@@ -34,8 +34,8 @@
     &:hover {
       background: #B3E5FC;
       border-color: #81D4FA;
-      transition: background-color 0.32s cubic-bezier(0.55, 0, 0.1, 1),
-                  border-color     0.32s cubic-bezier(0.55, 0, 0.1, 1);
+      transition: background-color 0.48s cubic-bezier(0.55, 0, 0.1, 1),
+                  border-color     0.48s cubic-bezier(0.55, 0, 0.1, 1);
     }
   }
 

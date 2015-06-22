@@ -11,7 +11,6 @@ class ButtonGroup extends React.Component {
 
   static propTypes = {
     name: React.PropTypes.string.isRequired,
-    label: React.PropTypes.string.isRequired,
     payload: React.PropTypes.array.isRequired,
     showDefault: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
@@ -46,7 +45,7 @@ class ButtonGroup extends React.Component {
         let classes = classnames({
           'Button': true,
           'ButtonGroup-button': true,
-          'Button--active': button.active
+          'Button--active': button.active && !this.props.disabled
         });
 
         return (
@@ -71,7 +70,7 @@ class ButtonGroup extends React.Component {
         _(this.props.mods)
           .chain()
           .map((a, b) => { return `ButtonGroup--${b}--${a}`; })
-          .thru((classname) => { return { [classname]: true } })
+          .thru((classname) => { return { [classname]: true }; })
           .value()
       )
     );

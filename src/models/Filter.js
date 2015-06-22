@@ -8,7 +8,10 @@ class Filter {
 
     this.price = {
       from: 0,
-      to: Infinity
+      to: Infinity,
+      min: 0,
+      max: 50000,
+      step: 1000
     };
 
     this.shouldHavePhotos = false;
@@ -20,13 +23,13 @@ class Filter {
         dontFilter: true
       },
       {
-        name: 'Комната',
-        matcher: /подселение|комнат(а|ы)/
-      },
-      {
         name: 'Квартира',
         hasRooms: true,
         matcher: /^(?! подселение|комнат(а|ы)).*/
+      },
+      {
+        name: 'Комната',
+        matcher: /подселение|комнат(а|ы)/
       }
     ];
 
@@ -254,7 +257,7 @@ class Filter {
     if (state.withoutRejected && apartment.rejectReasons.length > 0) {
       return false;
     }
-    else if (apartment.price.number < state.from || apartment.price.number > state.to) {
+    else if (apartment.price.number < state.price.from || apartment.price.number > state.price.to) {
       return false;
     }
     else if (!apartment.photos && state.shouldHavePhotos) {

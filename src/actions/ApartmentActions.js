@@ -11,7 +11,9 @@ class ApartmentActions extends Actions {
   }
 
   changeFilter (changedSegment) {
-    return changedSegment;
+    let key = [_.keys(changedSegment)[0]];
+    let value = changedSegment[key];
+    return { key, value };
   }
 }
 

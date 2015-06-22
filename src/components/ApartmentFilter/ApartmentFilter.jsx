@@ -7,6 +7,7 @@ import _ from 'lodash';
 import ButtonGroup from '../ButtonGroup/ButtonGroup.jsx';
 import Checkbox from '../Checkbox/Checkbox.jsx';
 import Select from '../Select/Select.jsx';
+import Slider from '../Slider/Slider.jsx';
 
 import './ApartmentFilter.css';
 
@@ -77,6 +78,22 @@ class ApartmentFilter extends React.Component {
               >
                 <span className="Filter-label Filter-label--wo-limit">Только с фото</span>
               </Checkbox>
+            </div>
+          </div>
+        </div>
+        <div className="Filter-line">
+          <div className="Filter-cell">
+            <div className="Filter-section">
+              <Slider
+                name="price"
+                min={ filter.price.min }
+                max={ filter.price.max }
+                step={ filter.price.step }
+                mods={ { 'layout': 'horisontal' } }
+                onChange={ this.handleChange.bind(this) }
+              >
+                <span className="Filter-label">Цена</span>
+              </Slider>
             </div>
           </div>
         </div>

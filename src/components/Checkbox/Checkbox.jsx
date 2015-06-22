@@ -8,7 +8,6 @@ class Checkbox extends React.Component {
 
   static propTypes = {
     name: React.PropTypes.string.isRequired,
-    label: React.PropTypes.string.isRequired,
     payload: React.PropTypes.bool.isRequired,
     disabled: React.PropTypes.bool
   }
@@ -29,20 +28,23 @@ class Checkbox extends React.Component {
     });
 
     return (
-      <fieldset
-        className={ classes }
-        disabled={ this.props.disabled }
-      >
-        <label>
+      <fieldset disabled={ this.props.disabled }>
+        <label className={ classes }>
           <input
             className="Checkbox-check"
             type="checkbox"
             checked={ this.props.payload }
             onChange={ this.handleChange.bind(this) }
           />
-          <span className="Checkbox-label">
-            { this.props.children }
-          </span>
+          {
+            this.props.children
+              ?
+                <span className="Checkbox-label">
+                  { this.props.children }
+                </span>
+              :
+                null
+          }
         </label>
       </fieldset>
     );

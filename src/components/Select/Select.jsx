@@ -9,7 +9,6 @@ class Select extends React.Component {
 
   static propTypes = {
     name: React.PropTypes.string.isRequired,
-    label: React.PropTypes.string.isRequired,
     payload: React.PropTypes.array.isRequired,
     disabled: React.PropTypes.bool
   }

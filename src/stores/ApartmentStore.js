@@ -36,11 +36,12 @@ class ApartmentStore extends Store {
     });
   }
 
-  handleChangeFilter (changedSegment) {
+  handleChangeFilter (obj) {
+
     this.setState({
       filter: React.addons.update(
         this.state.filter,
-        { $merge: changedSegment }
+        { [obj.key]: { $merge: obj.value } }
       )
     });
   }

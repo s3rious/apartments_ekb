@@ -21,8 +21,8 @@
     border-radius: 0.25rem;
     outline: none;
     cursor: pointer;
-    transition: background-color 0.32s cubic-bezier(0.55, 0, 0.1, 1),
-                border-color     0.32s cubic-bezier(0.55, 0, 0.1, 1);
+    transition: background-color 0.48s cubic-bezier(0.55, 0, 0.1, 1),
+                border-color     0.48s cubic-bezier(0.55, 0, 0.1, 1);
 
     &--hover,
     &:hover {
