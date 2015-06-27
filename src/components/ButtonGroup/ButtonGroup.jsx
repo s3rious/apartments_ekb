@@ -38,7 +38,7 @@ class ButtonGroup extends React.Component {
     let buttons = _(this.props.payload)
       .chain()
       .filter(button => {
-        return this.props.showDefault ? true : button.isDefault ? false : true;
+        return this.props.showDefault || button.isDefault;
       })
       .map(button => {
 
@@ -69,8 +69,12 @@ class ButtonGroup extends React.Component {
         },
         _(this.props.mods)
           .chain()
-          .map((a, b) => { return `ButtonGroup--${b}--${a}`; })
-          .thru((classname) => { return { [classname]: true }; })
+          .map((a, b) => {
+            return `ButtonGroup--${b}--${a}`;
+          })
+          .thru((classname) => {
+            return { [classname]: true };
+          })
           .value()
       )
     );
@@ -87,7 +91,7 @@ class ButtonGroup extends React.Component {
           </div>
         </div>
       </fieldset>
-    )
+    );
   }
 }
 

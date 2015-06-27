@@ -1,10 +1,10 @@
-import { Actions, Store, Flummox } from 'flummox';
+import { Store } from 'flummox';
 
 import asyncFetch from '../helpers/asyncFetch';
 
 class PostStore extends Store {
 
-  constructor(flux) {
+  constructor (flux) {
     super();
 
     const postActions = flux.getActions('posts');
@@ -28,7 +28,8 @@ class PostStore extends Store {
     this.length = data.count;
     this.offset = this.offset + data.items.length;
 
-    data.items.forEach(item => {
+    let flux = flux;
+    data.items.forEach((item) => {
       flux.getActions('posts').createNewPost(item);
     });
   }

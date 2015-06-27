@@ -1,5 +1,3 @@
-'use strict';
-
 import _ from 'lodash';
 import s from 'underscore.string';
 
@@ -19,7 +17,7 @@ let applyTests = function (string, context) {
 
     let gotNum = price.match(/\d{1,2}\ ?\d{3,99999}|\d{1,2}\.?\d{3,99999}|\d{1,99999}/);
     if (gotNum) {
-      context.price.number = parseInt(gotNum[0].replace(/\s+|\.+/g, ''));
+      context.price.number = parseInt(gotNum[0].replace(/\s+|\.+/g, ''), 10);
       if (context.price.number < 100) {
         context.price.number = context.price.number * 1000; // I'M NOT AFRAID TO GET DIRTY!
       }
@@ -181,6 +179,6 @@ let processExcluded = (context) => {
     context.rejectReasons.push('unknown number of rooms');
     console.warn('... got a possible mismatch or unknown number of rooms, apartment will be excluded', context);
   }
-}
+};
 
 export default { applyTests, processExcluded} ;

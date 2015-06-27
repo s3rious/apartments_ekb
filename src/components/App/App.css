@@ -1,8 +1,5 @@
 @import "../../../node_modules/normalize.css/normalize.css";
 
-@import "../Checkbox/Checkbox.css";
-@import "../Select/Select.css";
-
 :root {
   font-size: 16px;
   line-height: 1.4;

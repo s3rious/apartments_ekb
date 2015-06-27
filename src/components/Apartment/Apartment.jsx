@@ -1,10 +1,8 @@
 import React from 'react/addons';
-import FluxComponent from 'flummox/component';
-import flux from '../../flux';
 
 class Apartment extends React.Component {
 
-  render() {
+  render () {
     let apartment = this.props.data;
 
     return (

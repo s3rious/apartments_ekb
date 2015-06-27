@@ -1,10 +1,10 @@
-import { Actions, Store, Flummox } from 'flummox';
+import { Actions } from 'flummox';
 
 import Post from '../models/Post';
 
 class PostActions extends Actions {
 
-  fetchNext() {
+  fetchNext () {
     return true;
   }
 

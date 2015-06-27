@@ -238,7 +238,7 @@ class Filter {
       if (_.isArray(entity)) {
         return _.map(entity, (item) => {
           var clone = _.clone(item);
-          clone.active = item.isDefault ? true : false;
+          clone.active = item.isDefault;
           return clone;
         });
       }

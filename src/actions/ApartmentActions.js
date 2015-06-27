@@ -1,4 +1,4 @@
-import { Actions, Store, Flummox } from 'flummox';
+import { Actions } from 'flummox';
 
 import _ from 'lodash';
 

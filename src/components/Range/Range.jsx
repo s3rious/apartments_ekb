@@ -27,7 +27,7 @@ class Range extends React.Component {
     this.setState({
       from: values[0],
       to: values[1]
-    })
+    });
   }
 
   handleAfterChange () {
@@ -50,8 +50,12 @@ class Range extends React.Component {
         },
         _(this.props.mods)
           .chain()
-          .map((a, b) => { return `Range--${b}--${a}`; })
-          .thru((classname) => { return { [classname]: true }; })
+          .map((a, b) => {
+            return `Range--${b}--${a}`;
+          })
+          .thru((classname) => {
+            return { [classname]: true };
+          })
           .value()
       )
     );

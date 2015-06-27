@@ -1,13 +1,11 @@
 import React from 'react/addons';
-import FluxComponent from 'flummox/component';
-import flux from '../../flux';
 
 class ApartmentMap extends React.Component {
 
-  render() {
+  render () {
 
     return (
-      <div>123</div>
+      <div>Not implimented yet</div>
     );
   }
 }

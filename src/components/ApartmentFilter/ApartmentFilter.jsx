@@ -1,6 +1,4 @@
 import React from 'react/addons';
-import FluxComponent from 'flummox/component';
-import flux from '../../flux';
 
 import _ from 'lodash';
 

@@ -7,8 +7,8 @@ class Apartment {
   constructor (rawData, postId) {
     console.group('Apartment');
 
-    this.postId  = postId;
-    this.rawData  = rawData;
+    this.postId = postId;
+    this.rawData = rawData;
     this.rejectReasons = [];
     console.info(`Got an apartment from post: ${this.postId}...`, this);
 

@@ -66,7 +66,7 @@ class Select extends React.Component {
           { options }
         </select>
       </fieldset>
-    )
+    );
   }
 }
 

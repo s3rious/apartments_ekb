@@ -1,4 +1,4 @@
-import { Actions, Store, Flummox } from 'flummox';
+import { Flummox } from 'flummox';
 
 import PostActions from './actions/PostActions';
 import PostStore from './stores/PostStore';
@@ -8,7 +8,7 @@ import ApartmentStore from './stores/ApartmentStore';
 
 class Flux extends Flummox {
 
-  constructor() {
+  constructor () {
     super();
 
     this.createActions('posts', PostActions);
