@@ -43,7 +43,7 @@ class Apartment {
 
     try {
       console.info(`Try to get geodata for ${location}`, this);
-      let response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${location}&language=ru&key=AIzaSyBRHBOPTA0M5_HF-U1T4yEv6ST5PXRCduU`);
+      let response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${location}&language=ru`);
       let data = await response.json();
 
       if (data.status === 'ZERO_RESULTS') {
@@ -51,7 +51,13 @@ class Apartment {
       }
 
       if (data.status === 'OVER_QUERY_LIMIT') {
-        setTimeout(this.getGeoData.bind(this), 1000);
+        // Dirty ;<
+        if (data.error_message === "You have exceeded your rate-limit for this API.") {
+          setTimeout(this.getGeoData.bind(this), 1000);
+        }
+        else {
+          throw new Error('Stuck at qouta limits');
+        }
       }
 
       if (data.results.length > 0) {
