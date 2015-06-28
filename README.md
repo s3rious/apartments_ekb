@@ -12,3 +12,4 @@ Custom frontend for https://vk.com/apartments_ekb
 * Polish, polish, polish. Make it shine
 
 ## Demo
+http://s3rious.github.io/apartments_ekb/
