@@ -8,8 +8,12 @@
     "build": "webpack --config webpack.config.build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "github.com:s3rious/apartments_ekb.git"
+  },
+  "author": "s3rious a.k.a Leonid Semenov <canismajor@kaschenka.ru>",
+  "license": "None",
   "devDependencies": {
     "autoprefixer-core": "^5.2.0",
     "babel": "^5.5.6",
@@ -41,6 +45,7 @@
     "react": "^0.13.3",
     "react-ink": "^4.1.0",
     "react-slider": "^0.4.2",
+    "react-tap-event-plugin": "^0.1.7",
     "then-jsonp": "^1.0.3",
     "underscore.string": "^3.1.1"
   }

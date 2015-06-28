@@ -1,12 +1,12 @@
 # Apartments EKB
-Custom fronted for https://vk.com/apartments_ekb
+Custom frontend for https://vk.com/apartments_ekb
 
-## TODO'n'BUGS
+## Todo list
 * Speed it up. Move parser to backend with cache, or webworker with localstorage cache
 * Create a proper apartments card
-* Tie map and apartments list
+* Tie map and apartments list somehow
 * Make selects look like a selects
-* Favourites tab
+* Save for later feature
 * Infinite scroll
 * Make it work at mobiles
 * Polish, polish, polish. Make it shine
