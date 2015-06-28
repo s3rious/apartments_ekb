@@ -1,9 +1,9 @@
 import React from 'react/addons';
-
 import _ from 'lodash';
 import classnames from 'classnames/dedupe';
+import proccessMods from '../../helpers/processMods.js';
 
-import Ink from 'react-ink';
+import Button from '../Button/Button.jsx';
 
 import './ButtonGroup.css';
 
@@ -14,7 +14,8 @@ class ButtonGroup extends React.Component {
     payload: React.PropTypes.array.isRequired,
     showDefault: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
-    mods: React.PropTypes.objectOf(React.PropTypes.string)
+    mods: React.PropTypes.objectOf(React.PropTypes.string),
+    onChange: React.PropTypes.function
   }
 
   handleChange (clickedButton) {
@@ -38,45 +39,30 @@ class ButtonGroup extends React.Component {
     let buttons = _(this.props.payload)
       .chain()
       .filter(button => {
-        return this.props.showDefault || button.isDefault;
+        return this.props.showDefault || !button.isDefault;
       })
       .map(button => {
 
-        let classes = classnames({
-          'Button': true,
-          'ButtonGroup-button': true,
-          'Button--active': button.active && !this.props.disabled
-        });
-
         return (
-          <button
+          <Button
             key={ button.name }
-            className={ classes }
+            className="ButtonGroup-button"
             onClick={ this.handleChange.bind(this, button) }
+            active={ button.active }
+            disabled={ this.props.disabled }
           >
             { button.name }
-            <Ink />
-          </button>
+          </Button>
         );
       })
       .value();
 
     let classes = classnames(
-      _.extend(
-        {
-          'ButtonGroup': true,
-          'ButtonGroup--disabled': this.props.disabled
-        },
-        _(this.props.mods)
-          .chain()
-          .map((a, b) => {
-            return `ButtonGroup--${b}--${a}`;
-          })
-          .thru((classname) => {
-            return { [classname]: true };
-          })
-          .value()
-      )
+      {
+        'ButtonGroup': true,
+        'ButtonGroup--disabled': this.props.disabled
+      },
+      proccessMods(this.props.mods, 'ButtonGroup')
     );
 
     return (

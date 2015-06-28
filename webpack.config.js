@@ -30,7 +30,8 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loader: 'react-hot!babel?stage=0!strip-loader?strip[]=console.group,strip[]=console.groupEnd,strip[]=console.log,strip[]=console.warn,strip[]=console.error,strip[]=console.info',
+        loader: 'react-hot!babel?stage=0',
+        // loader: 'react-hot!babel?stage=0!strip-loader?strip[]=console.group,strip[]=console.groupEnd,strip[]=console.log,strip[]=console.warn,strip[]=console.error,strip[]=console.info',
         include: path.join(__dirname, 'src')
       },
       {

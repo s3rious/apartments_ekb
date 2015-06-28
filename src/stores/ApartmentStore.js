@@ -61,6 +61,10 @@ class ApartmentStore extends Store {
       return Filter.processApartment(apartment, filter);
     });
   }
+
+  getSelectedCity () {
+    return _.where(this.state.filter.city, { active: true })[0];
+  }
 }
 
 export default ApartmentStore;

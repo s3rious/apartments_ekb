@@ -20,20 +20,20 @@ class ApartmentFilter extends React.Component {
     let filter = this.props.filter;
 
     return (
-      <div className="Filter">
-        <div className="Filter-line">
-          <div className="Filter-cell">
-            <div className="Filter-section">
+      <div className="ApartmentFilter">
+        <div className="ApartmentFilter-line">
+          <div className="ApartmentFilter-cell">
+            <div className="ApartmentFilter-section">
               <ButtonGroup
                 name="type"
                 payload={ filter.type }
                 onChange={ this.handleChange.bind(this) }
                 mods={ { 'layout': 'horisontal' } }
               >
-                <span className="Filter-label">Тип</span>
+                <span className="ApartmentFilter-label">Тип</span>
               </ButtonGroup>
             </div>
-            <div className="Filter-section">
+            <div className="ApartmentFilter-section">
               <ButtonGroup
                 name="rooms"
                 payload={ filter.rooms }
@@ -41,21 +41,21 @@ class ApartmentFilter extends React.Component {
                 disabled={ !_.findWhere(filter.type, { active: true }).hasRooms }
                 mods={ { 'layout': 'horisontal' } }
               >
-                <span className="Filter-label">Комнат</span>
+                <span className="ApartmentFilter-label">Комнат</span>
               </ButtonGroup>
             </div>
           </div>
-          <div className="Filter-cell">
-            <div className="Filter-section">
+          <div className="ApartmentFilter-cell">
+            <div className="ApartmentFilter-section">
               <Select
                 name="city"
                 payload={ filter.city }
                 onChange={ this.handleChange.bind(this) }
               >
-                <span className="Filter-label">Город</span>
+                <span className="ApartmentFilter-label">Город</span>
               </Select>
             </div>
-            <div className="Filter-section">
+            <div className="ApartmentFilter-section">
               <Select
                 name="district"
                 label="Район"
@@ -63,25 +63,25 @@ class ApartmentFilter extends React.Component {
                 onChange={ this.handleChange.bind(this) }
                 disabled={ !_.findWhere(filter.city, { active: true }).hasDistricts }
               >
-                <span className="Filter-label">Район</span>
+                <span className="ApartmentFilter-label">Район</span>
               </Select>
             </div>
           </div>
-          <div className="Filter-cell">
-            <div className="Filter-section">
+          <div className="ApartmentFilter-cell">
+            <div className="ApartmentFilter-section">
               <Checkbox
                 name="shouldHavePhotos"
                 payload={ filter.shouldHavePhotos }
                 onChange={ this.handleChange.bind(this) }
               >
-                <span className="Filter-label Filter-label--wo-limit">Только с фото</span>
+                <span className="ApartmentFilter-label ApartmentFilter-label--wo-limit">Только с фото</span>
               </Checkbox>
             </div>
           </div>
         </div>
-        <div className="Filter-line">
-          <div className="Filter-cell">
-            <div className="Filter-section">
+        <div className="ApartmentFilter-line">
+          <div className="ApartmentFilter-cell">
+            <div className="ApartmentFilter-section">
               <Range
                 name="price"
                 min={ filter.price.min }
@@ -90,7 +90,7 @@ class ApartmentFilter extends React.Component {
                 mods={ { 'layout': 'horisontal' } }
                 onChange={ this.handleChange.bind(this) }
               >
-                <span className="Filter-label">Цена</span>
+                <span className="ApartmentFilter-label">Цена</span>
               </Range>
             </div>
           </div>

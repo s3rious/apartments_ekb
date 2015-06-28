@@ -1,4 +1,4 @@
-.Filter {
+.ApartmentFilter {
 
   &-line {
     width: 100%;
@@ -39,9 +39,9 @@
   }
 }
 
-@media (max-width: 1279px) {
+@media (max-width: 1280px) {
 
-  .Filter {
+  .ApartmentFilter {
     margin-right: 0rem;
 
     &-cell:nth-child(2) {
@@ -65,7 +65,7 @@
 
 @media (max-width: 1023px) {
 
-  .Filter {
+  .ApartmentFilter {
 
     &-line {
       display: block;

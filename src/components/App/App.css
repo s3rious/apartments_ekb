@@ -16,11 +16,20 @@ fieldset {
   border: 0;
 }
 
+html,
+body,
+.App {
+  height: 100%;
+}
+
 .App {
   padding-right: 40%;
   background-color: #FFFFFF;
 
   &-container {
+    display: flex;
+    flex-flow: column;
+    min-height: 100%;
     box-sizing: border-box;
     padding: 1.5rem 1rem;
   }
@@ -29,11 +38,13 @@ fieldset {
     padding: 0.5rem 1rem 0.5rem;
     margin: -1.5rem -1rem 0;
     border-bottom: 1px solid #CFD8DC;
+    position: relative;
   }
 
   &-apartments {
+    flex-grow: 1;
     background-color: #ECEFF1;
-    padding: 1.5rem 1rem;
+    padding: 1rem 1rem;
     margin: 0 -1rem -1.5rem;
   }
 
@@ -44,7 +55,8 @@ fieldset {
     top: 0;
     right: 0;
     height: 100%;
-    display: none;
+    background: #E5E3DF;
+    border-left: 1px solid #CFD8DC;
   }
 }
 

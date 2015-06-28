@@ -1,9 +1,10 @@
 import React from 'react/addons';
 
-import _ from 'lodash';
-import ReactSlider from 'react-slider';
 import classnames from 'classnames/dedupe';
+import processMods from '../../helpers/processMods.js';
 import prettifyPrice from '../../helpers/prettifyPrice';
+
+import ReactSlider from 'react-slider';
 
 import './Range.css';
 
@@ -14,7 +15,8 @@ class Range extends React.Component {
     max: React.PropTypes.number,
     step: React.PropTypes.number,
     disabled: React.PropTypes.bool,
-    onChange: React.PropTypes.func
+    onChange: React.PropTypes.func,
+    mods: React.PropTypes.objectOf(React.PropTypes.string)
   }
 
   state = {
@@ -43,21 +45,11 @@ class Range extends React.Component {
   render () {
 
     let classes = classnames(
-      _.extend(
-        {
-          'Range': true,
-          'Range--disabled': this.props.disabled
-        },
-        _(this.props.mods)
-          .chain()
-          .map((a, b) => {
-            return `Range--${b}--${a}`;
-          })
-          .thru((classname) => {
-            return { [classname]: true };
-          })
-          .value()
-      )
+      {
+        'Range': true,
+        'Range--disabled': this.props.disabled
+      },
+      processMods(this.props.mods, 'Range')
     );
 
     return (

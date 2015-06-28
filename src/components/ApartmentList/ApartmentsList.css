@@ -1,0 +1,13 @@
+.ApartmentsList {
+  padding: 0.5rem 0.5rem;
+  margin: -1rem -1rem 0;
+
+  &-apartment {
+    box-sizing: border-box;
+    padding: 0.5rem 0.5rem;
+  }
+
+  &-card {
+    padding: 0.5rem 0.75rem;
+  }
+}

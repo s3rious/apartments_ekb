@@ -1,6 +1,5 @@
+import React from 'react/addons';
 import { Store } from 'flummox';
-
-import asyncFetch from '../helpers/asyncFetch';
 
 class PostStore extends Store {
 
@@ -9,34 +8,33 @@ class PostStore extends Store {
 
     const postActions = flux.getActions('posts');
 
-    this.offset = 1;
-    this.getBy = 10;
-
     this.register(postActions.fetchNext, this.handleFetchNext);
     this.register(postActions.createNewPost, this.handleCreateNewPost);
 
-    this.state = {};
+    this.state = {
+      count: 0,
+      posts: {}
+    };
   }
 
   getNextUrl = function () {
     return `https://api.vk.com/method/wall.get?domain=apartments_ekb&offset=${this.offset}&count=${this.getBy}&filter=owner&v=5.34`;
   };
 
-  async handleFetchNext () {
-    var data = await asyncFetch(this.getNextUrl());
+  handleFetchNext (count) {
 
-    this.length = data.count;
-    this.offset = this.offset + data.items.length;
-
-    let flux = flux;
-    data.items.forEach((item) => {
-      flux.getActions('posts').createNewPost(item);
+    this.setState({
+      count: count
     });
   }
 
   handleCreateNewPost (post) {
+
     this.setState({
-      [post.id]: post
+      posts: React.addons.update(
+        this.state.posts,
+        { $merge: { [post.id]: post } }
+      )
     });
   }
 }

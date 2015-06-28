@@ -1,0 +1,41 @@
+.Grid {
+  display: flex;
+  flex-wrap: wrap;
+
+  &-cell {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 100%;
+  }
+
+  &--columns {
+
+    &--1 {
+
+      .Grid-cell {
+        max-width: 100%;
+      }
+    }
+
+    &--2 {
+
+      .Grid-cell {
+        max-width: 50%;
+      }
+    }
+
+    &--3 {
+
+      .Grid-cell {
+        max-width: 33.3333%;
+      }
+    }
+
+    &--4 {
+
+      .Grid-cell {
+        max-width: 25%;
+      }
+    }
+  }
+}

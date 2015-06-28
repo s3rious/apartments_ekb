@@ -32,4 +32,9 @@
                   border-color     0s linear;
     }
   }
+
+  &--disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
 }
