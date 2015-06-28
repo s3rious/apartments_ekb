@@ -16,7 +16,7 @@ class App extends React.Component {
   loadMore () {
     let postsLength = _.keys(flux.getStore('posts').state.posts).length;
 
-    flux.getActions('posts').fetchNext(postsLength, 100);
+    flux.getActions('posts').fetchNext(postsLength, 10);
   }
 
   componentDidMount () {
