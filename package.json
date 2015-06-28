@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server",
+    "dev": "webpack-dev-server --config webpack.config.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -19,7 +19,7 @@
     "eslint": "^0.24.0",
     "eslint-config-standard": "^3.4.0",
     "eslint-plugin-react": "^2.5.2",
-    "file-loader": "^0.8.4",
+    "extract-text-webpack-plugin": "^0.8.2",
     "node-libs-browser": "^0.5.2",
     "normalize.css": "^3.0.3",
     "postcss-import": "^5.2.2",

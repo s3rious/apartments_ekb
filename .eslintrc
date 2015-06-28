@@ -1,7 +1,7 @@
 {
   "parser": "babel-eslint",
 
-  // "extends": "standard",
+  "extends": "standard",
 
   "plugins": [ "react" ],
 
