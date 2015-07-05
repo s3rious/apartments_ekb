@@ -2,7 +2,7 @@
 Custom frontend for https://vk.com/apartments_ekb
 
 ## Todo list
-* Speed it up. Move parser to backend with cache, or webworker with localstorage cache
+* ~~Speed it up. Move parser to backend with cache, or webworker with localstorage cache~~
 * Create a proper apartments card
 * Tie map and apartments list somehow
 * Make selects look like a selects
