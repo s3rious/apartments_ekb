@@ -13,6 +13,7 @@ class ApartmentStore extends Store {
     this.apartmentCounter = 0;
 
     this.register(apartmentActions.createNewApartment, this.handleCreateNewApartment);
+    this.register(apartmentActions.setGeodataForApartment, this.handleSetGeodataForApartment);
     this.register(apartmentActions.changeFilter, this.handleChangeFilter);
 
     this.state = {
@@ -23,7 +24,6 @@ class ApartmentStore extends Store {
 
   handleCreateNewApartment (apartment) {
     const id = this.apartmentCounter++;
-
     apartment.id = id;
 
     this.setState({
@@ -34,8 +34,17 @@ class ApartmentStore extends Store {
     });
   }
 
-  handleChangeFilter (newFilter) {
+  handleSetGeodataForApartment (data) {
 
+    this.setState({
+      apartments: React.addons.update(
+        this.state.apartments,
+        { [data.id]: { $merge: { geo: data.geodata } } }
+      )
+    });
+  }
+
+  handleChangeFilter (newFilter) {
     let op = _.isObject(this.state.filter[newFilter.key]) ? '$merge' : '$set'; // Array is fine too
 
     this.setState({
@@ -44,6 +53,16 @@ class ApartmentStore extends Store {
         { [newFilter.key]: { [op]: newFilter.value } }
       )
     });
+  }
+
+  getIdByKey (key, value) {
+    // TODO: Get rid of that bullshit
+    return _(this.state.apartments)
+      .chain()
+      .pairs()
+      .filter(function (pair) {
+        return pair[1][key] === event.data.payload.apartment[key];
+      }).value()[0][0];
   }
 
   get (id) {

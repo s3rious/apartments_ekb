@@ -17,10 +17,6 @@ class PostStore extends Store {
     };
   }
 
-  getNextUrl = function () {
-    return `https://api.vk.com/method/wall.get?domain=apartments_ekb&offset=${this.offset}&count=${this.getBy}&filter=owner&v=5.34`;
-  };
-
   handleFetchNext (count) {
 
     this.setState({
