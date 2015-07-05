@@ -1,45 +1,14 @@
-import _ from 'lodash';
-
-import flux from '../flux';
-
 class Post {
 
-  constructor (post) {
-    console.group('Post');
-
-    this.id = post.id;
-    this.rawData = post.text;
+  constructor (rawData) {
+    this.id = rawData.id;
     this.isAd = false;
 
-    if (/(объявление\ с\ комиссией|\: \реклама\ \:)/.test(this.rawData.toLowerCase())) {
+    if (/(некоммерческий\sсоциальный\sпроект|объявление\sс\sкомиссией|\:\sреклама\s\:)/.test(rawData.text.toLowerCase())) {
       this.isAd = true;
     }
 
-    console.info('Got new post: ${id}...', this);
-
-    if (this.isAd) {
-      this.apartments = [];
-    }
-    else {
-
-      this.apartments = (
-        _(post.text)
-          .split(/Сда[е|ё]тся\:\ /)
-          .filter(string => {
-            return !(/^(-)+/.test(string));
-          })
-          .thru(function (rawArray) {
-            console.info(`It has ${rawArray.length} apartments.`);
-            return rawArray;
-          })
-          .map(string => {
-            flux.getActions('apartments').createNewApartment(string, this.id);
-          })
-          .value()
-      );
-    }
-
-    console.groupEnd('Post');
+    console.info(`Got new post: ${this.id}`, this);
   };
 }
 

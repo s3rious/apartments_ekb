@@ -1,7 +1,7 @@
 import { Actions } from 'flummox';
 import asyncFetch from '../helpers/asyncFetch';
 
-import Post from '../models/Post';
+import foreman from '../foreman.js';
 
 class PostActions extends Actions {
 
@@ -10,11 +10,7 @@ class PostActions extends Actions {
 
     try {
       var data = await asyncFetch(url);
-
-      data.items.forEach((item) => {
-        this.createNewPost(item);
-      });
-
+      await foreman.parsePosts(data.items);
       return data.count;
     }
     catch (error) {
@@ -22,8 +18,8 @@ class PostActions extends Actions {
     }
   }
 
-  createNewPost (item) {
-    return new Post(item);
+  createNewPost (post) {
+    return post;
   }
 }
 

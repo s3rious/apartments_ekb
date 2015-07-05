@@ -2,12 +2,14 @@ import { Actions } from 'flummox';
 
 import _ from 'lodash';
 
-import Apartment from '../models/Apartment';
-
 class ApartmentActions extends Actions {
 
-  createNewApartment (rawData, postId) {
-    return new Apartment(rawData, postId);
+  createNewApartment (apartment) {
+    return apartment;
+  }
+
+  setGeodataForApartment (apartmentId, geodata) {
+    return { id: apartmentId, geodata: geodata };
   }
 
   changeFilter (changedSegment) {

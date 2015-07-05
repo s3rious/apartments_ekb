@@ -4,17 +4,44 @@ import { GoogleMaps, Marker } from 'react-google-maps';
 
 class ApartmentMap extends React.Component {
 
-  render () {
-    let geo = this.props.selectedCity.geo;
-    let markers = _(this.props.apartments).map((marker, index) => {
+  state = {
+    geo: this.props.selectedCity.geo
+  }
 
-      return (
-        <Marker
-          position={ marker.address.geo }
-          key={ marker.index }
-        />
-      );
-    }).value();
+  handleMapMove () {
+    return requestAnimationFrame(() => {
+      let center = this.refs.map.getCenter();
+      let zoom = this.refs.map.getZoom();
+      this.setState({
+        geo: {
+          center: center,
+          zoom: zoom
+        }
+      });
+    });
+  }
+
+  componentWillReceiveProps (nextProps) {
+
+    if (this.props.selectedCity !== nextProps.selectedCity) {
+      this.setState({
+        geo: nextProps.selectedCity.geo
+      });
+    }
+  }
+
+  render () {
+    let geo = this.state.geo;
+    let markers = _(this.props.apartments)
+      .map((marker, index) => {
+
+        return (
+          <Marker
+            position={ marker.geo }
+            key={ marker.index }
+          />
+        );
+      }).value();
 
     return (
       <GoogleMaps containerProps={{
@@ -22,9 +49,13 @@ class ApartmentMap extends React.Component {
             height: '100%'
           }
         }}
+        ref="map"
         googleMapsApi={ window.google.maps || null }
+        disableDefaultUI={ true }
+        backgroundColor="#ECEFF1"
         zoom={ geo.zoom }
         center={ geo.center }
+        onIdle={this.handleMapMove.bind(this)}
       >
         { markers }
       </GoogleMaps>

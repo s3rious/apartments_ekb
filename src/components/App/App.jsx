@@ -76,5 +76,4 @@ class App extends React.Component {
   }
 }
 
-let mountNode = document.getElementById('App');
-React.render(<App/>, mountNode);
+export default App;
